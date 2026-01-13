@@ -1,19 +1,15 @@
 /* LIGHT MODE (default) */
 :root {
-  --bg-dark: oklch(0.92 0.01 80);
-  --bg: oklch(0.96 0.01 80);
-  --bg-light: oklch(1 0.01 80);
-
-  --text: oklch(0.15 0.02 80);
-  --text-muted: oklch(0.4 0.02 80);
-
-  --highlight: oklch(1 0.02 80);
-  --border: oklch(0.75 0.015 80);
-  --border-muted: oklch(0.82 0.01 80);
-
-  --primary: oklch(0.5 0.12 80);
-  --secondary: oklch(0.4 0.1 260);
-
+  --bg-dark: oklch(0.92 0.01 183);
+  --bg: oklch(0.96 0.01 183);
+  --bg-light: oklch(1 0.01 183);
+  --text: oklch(0.15 0.02 183);
+  --text-muted: oklch(0.4 0.02 183);
+  --highlight: oklch(1 0.02 183);
+  --border: oklch(0.6 0.02 183);
+  --border-muted: oklch(0.7 0.02 183);
+  --primary: oklch(0.4 0.1 183);
+  --secondary: oklch(0.4 0.1 3);
   --danger: oklch(0.5 0.05 30);
   --warning: oklch(0.5 0.05 100);
   --success: oklch(0.5 0.05 160);
@@ -21,5 +17,18 @@
 }
 
 .dark {
-  --bg-light: oklch(0.1 0.01 80);
+  --bg-dark: oklch(0.1 0.01 183);
+  --bg: oklch(0.15 0.01 183);
+  --bg-light: oklch(0.2 0.01 183);
+  --text: oklch(0.96 0.02 183);
+  --text-muted: oklch(0.76 0.02 183);
+  --highlight: oklch(0.5 0.02 183);
+  --border: oklch(0.4 0.02 183);
+  --border-muted: oklch(0.3 0.02 183);
+  --primary: oklch(0.76 0.1 183);
+  --secondary: oklch(0.76 0.1 3);
+  --danger: oklch(0.7 0.05 30);
+  --warning: oklch(0.7 0.05 100);
+  --success: oklch(0.7 0.05 160);
+  --info: oklch(0.7 0.05 260);
 }

@@ -2,15 +2,15 @@
 
 .main-nav {
   padding: 0.5rem 1rem;
-  background-color: var(--bg-light);
+  background-color: var(--bg);
 
   &__container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1080px;
+    max-width: 900px;
     margin: 0 auto;
-    background-color: var(--bg-light);
+    background-color: var(--bg);
   }
 
   &__logo {
@@ -22,7 +22,7 @@
   }
 
   &__image {
-    height: 2.5rem;
+    height: 2rem;
   }
 
   &__text {

@@ -1,8 +1,8 @@
 import { NavLink } from 'react-router-dom'
 import { Sun, Moon } from 'lucide-react'
 import { useState, useEffect } from 'react'
-import logo_light from '../../assets/logo_light.png'
-import logo_dark from '../../assets/logo_dark.png'
+import logo_light from '../../assets/logo_light.svg'
+import logo_dark from '../../assets/logo_light.svg'
 
 const Header = () => {
   const [isDark, setIsDark] = useState(false)
