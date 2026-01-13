@@ -1,0 +1,42 @@
+@use '../../styles/variables.scss';
+
+.main-nav {
+  padding: 0.5rem 1rem;
+  background-color: var(--bg-light);
+
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1080px;
+    margin: 0 auto;
+    background-color: var(--bg-light);
+  }
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  &__image {
+    height: 2.5rem;
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+    font-weight: 600;
+  }
+
+  &__theme-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+  }
+}

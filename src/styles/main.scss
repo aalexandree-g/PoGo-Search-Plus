@@ -1,0 +1,38 @@
+@use './variables';
+
+// components
+@use '../components/header/header';
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--bg-light);
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.home__form {
+  display: grid;
+  gap: 12px;
+  max-width: 720px;
+  margin: 40px auto;
+  padding: 0 24px;
+}
+
+.home__textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  color: var(--text);
+  resize: vertical;
+}
+
+.home__button {
+  justify-self: center;
+  padding: 10px 14px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--primary);
+  color: var(--bg-light);
+  cursor: pointer;
+}
