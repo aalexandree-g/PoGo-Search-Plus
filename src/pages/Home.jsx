@@ -15,11 +15,12 @@ const Home = () => {
           rows={1}
           onInput={onInput}
           spellCheck="false"
-          placeholder="Exemple : (bulbizarre&chromatique),4*"
+          placeholder={`Tapez votre recherche.
+Ex : (pikachu&chromatique),4*`}
         />
 
         <button className="home__button" type="submit">
-          Valider
+          Convertir
         </button>
       </form>
     </div>

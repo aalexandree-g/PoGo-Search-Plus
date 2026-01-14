@@ -1,5 +1,9 @@
 <!doctype html>
-<html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Test SVG</title>
+  </head>
   <body>
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -7,13 +11,6 @@
       role="img"
       aria-label="PoGo Search Plus"
     >
-      <!--
-    Couleurs (modifiable via CSS) :
-    - --logo-stroke : couleur des contours
-    - --logo-top    : couleur de la moitié haute
-    - --logo-bottom : couleur de la moitié basse
-    Par défaut : contours noir, haut vert, bas blanc
-  -->
       <style>
         :root {
           --logo-stroke: #111;
@@ -33,7 +30,7 @@
       />
 
       <!-- Top half -->
-      <path d="M 9 50 A 30 30 0 0 1 91 50 L 6 50 Z" fill="var(--logo-top)" />
+      <path d="M 9 50 A 30 30 0 0 1 91 50 L 6 50 Z" fill="currentColor" />
 
       <!-- Middle band -->
       <rect x="6" y="46" width="88" height="8" fill="var(--logo-stroke)" />
