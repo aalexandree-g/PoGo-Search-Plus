@@ -1,7 +1,8 @@
 @use '../../styles/variables.scss';
 
 .main-nav {
-  padding: 0.5rem 1rem;
+  margin: 0 1rem;
+  padding: 0.5rem 0rem;
   background-color: var(--bg);
 
   &__container {
@@ -39,5 +40,10 @@
     color: var(--text);
     display: flex;
     align-items: center;
+    transition: 0.2s ease-in-out;
+    &:hover {
+      color: var(--primary);
+      transition: 0.2s ease-in-out;
+    }
   }
 }

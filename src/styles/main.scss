@@ -3,6 +3,9 @@
 // components
 @use '../components/header/header';
 
+// pages
+@use '../pages/home/home';
+
 body {
   font-family: 'Inter', system-ui, sans-serif;
   background: var(--bg);
@@ -14,60 +17,6 @@ body {
   display: flex;
   flex-direction: column;
   gap: 3rem;
-}
-
-.home__form {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  max-width: 720px;
+  max-width: 900px;
   margin: 0 auto;
-}
-
-.home__textarea {
-  padding: 0.8rem 1rem;
-  margin: 0 2rem;
-  border-radius: 0.7rem;
-  border: 1px solid var(--border);
-  background: var(--bg);
-  color: var(--text);
-  resize: none;
-  overflow: hidden;
-  border: solid 1px var(--primary);
-  box-shadow: 0 2px var(--primary);
-  outline: none;
-
-  transition: 0.3s ease-in-out;
-
-  &:focus-visible {
-    background: var(--bg-light);
-    box-shadow: 0 4px var(--primary);
-    transition: 0.3s ease-in-out;
-  }
-}
-
-.home__button {
-  height: 3rem;
-  width: 10rem;
-  padding: 10px 14px;
-  margin: 0 auto;
-  border: solid 2px var(--primary);
-  border-radius: 0.7rem;
-  font-size: 0.9rem;
-  font-weight: 700;
-  color: var(--primary);
-  background: var(--bg);
-  cursor: pointer;
-
-  border: solid 1px var(--primary);
-  box-shadow: 0 2px var(--primary);
-
-  transition: 0.3s ease-in-out;
-
-  &:hover {
-    background: var(--bg-light);
-    box-shadow: 0 4px var(--primary);
-    transition: 0.3s ease-in-out;
-  }
 }

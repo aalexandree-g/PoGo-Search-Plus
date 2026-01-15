@@ -1,0 +1,104 @@
+.home {
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin: 0 7rem;
+  }
+
+  &__field {
+    padding: 0.8rem 1rem;
+    border-radius: 0.7rem;
+    border: solid 1px var(--text-muted);
+    box-shadow: 0 2px var(--text-muted);
+    font-family: monospace !important ;
+    color: var(--text-muted);
+    background: var(--bg);
+
+    &--rules {
+      display: flex;
+      flex-direction: column;
+      border: solid 1px var(--secondary);
+      box-shadow: 0 2px var(--secondary);
+      color: var(--secondary);
+
+      &:hover {
+        box-shadow: 0 4px var(--secondary);
+      }
+
+      &-header {
+        all: unset;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        cursor: pointer;
+      }
+
+      h1 {
+        margin-top: 0;
+        margin-bottom: 0;
+        font-size: 1rem;
+      }
+    }
+
+    .rules {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      overflow: hidden;
+      max-height: 0;
+      opacity: 0;
+      transition: opacity;
+
+      &.is-open {
+        margin-top: 1rem;
+        max-height: 200px;
+        opacity: 1;
+      }
+    }
+
+    &--input {
+      resize: none;
+      outline: none;
+      overflow: hidden;
+      color: var(--text);
+      background: var(--bg-light);
+
+      &:hover,
+      &:focus-visible {
+        box-shadow: 0 4px var(--text-muted);
+      }
+    }
+
+    &--result {
+      &:hover {
+        box-shadow: 0 4px var(--text-muted);
+      }
+    }
+  }
+
+  &__button {
+    height: 3rem;
+    padding: 1rem 2rem;
+    align-self: flex-end;
+    border-radius: 0.7rem;
+    border: solid 1px var(--text-muted);
+    box-shadow: 0 2px var(--text-muted);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text);
+    background: var(--bg-light);
+
+    cursor: pointer;
+
+    &:hover {
+      color: var(--primary);
+      border-color: var(--primary);
+      box-shadow: 0 4px var(--primary);
+    }
+  }
+}
+
+.u-elevated {
+  transition: 0.2s ease-in-out;
+}
