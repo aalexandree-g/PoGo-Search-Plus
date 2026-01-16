@@ -2,12 +2,19 @@
 
 // components
 @use '../components/header/header';
+@use '../components/rules/rulesAccordion';
+@use '../components/search/searchInput';
+@use '../components/result/resultBox';
 
 // pages
 @use '../pages/home/home';
 
+// utilities
+@use '../styles/utilities/surface';
+@use '../styles/utilities/elevated';
+
 body {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: monospace;
   background: var(--bg);
   color: var(--text-muted);
   margin: 0;
