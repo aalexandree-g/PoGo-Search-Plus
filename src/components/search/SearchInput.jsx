@@ -1,5 +1,7 @@
 const SearchInput = ({
   refEl,
+  hasSubmitted,
+  isFocused,
   value,
   onChange,
   onInput,
@@ -12,8 +14,13 @@ const SearchInput = ({
     <div className="search-input">
       <textarea
         ref={refEl}
-        className="u-surface search-input__content"
-        rows={2}
+        className={[
+          'u-surface',
+          'search-input__content',
+          hasSubmitted && !isFocused && 'is-submitted',
+        ]
+          .filter(Boolean)
+          .join(' ')}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         onInput={onInput}

@@ -25,10 +25,12 @@ const Home = () => {
         <SearchInput
           refEl={ref}
           hasSubmitted={homeLogic.hasSubmitted}
+          isFocused={homeLogic.isFocused}
           value={homeLogic.value}
           onChange={homeLogic.setValue}
           onInput={onInput}
-          onFocus={homeLogic.setIsFocused}
+          onFocus={homeLogic.handleFocus}
+          onBlur={homeLogic.handleBlur}
           showReset={homeLogic.showReset}
           onReset={homeLogic.handleReset}
         />

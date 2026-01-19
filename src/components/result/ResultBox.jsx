@@ -17,6 +17,26 @@ const ResultBox = ({ show, hasSubmitted, result }) => {
           hasSubmitted ? 'is-active' : ''
         }`}
       >
+        <div className="result-box__toolbar">
+          <span className="result-box__title">
+            Formule adaptée à Pokémon GO
+          </span>
+
+          <button
+            type="button"
+            className="result-box__copy"
+            onClick={handleCopy}
+            aria-label="Copier le résultat"
+            title="Copier"
+            disabled={!text}
+          >
+            <div className="result-box__copy-label">
+              {' '}
+              <span>Copier le code</span> <Copy size={14} />{' '}
+            </div>
+          </button>
+        </div>
+
         {text ? (
           <pre className="result-box__text">{text}</pre>
         ) : (
@@ -25,18 +45,6 @@ const ResultBox = ({ show, hasSubmitted, result }) => {
           </span>
         )}
       </div>
-
-      <button
-        type="button"
-        className="result-box__copy"
-        onClick={handleCopy}
-        aria-label="Copier le résultat"
-        title="Copier"
-        disabled={!text}
-      >
-        <Copy size={16} />
-        <span>Copier le code</span>
-      </button>
     </div>
   )
 }

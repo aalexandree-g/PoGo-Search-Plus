@@ -3,47 +3,37 @@
   width: 100%;
 
   &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
     background: var(--bg-light);
     border-color: var(--bg-light);
   }
 
   &__text {
-    margin: 0;
     white-space: pre-wrap;
-    word-break: break-word;
+    word-break: break-all;
+    margin: 0;
   }
 
   &__placeholder {
     color: var(--text-muted);
   }
 
-  &__copy {
-    position: absolute;
-    top: 0.6rem;
-    right: 0.6rem;
-
-    width: 4rem;
-    height: 2rem;
-    border-radius: 0.4rem;
-
-    display: inline-flex;
+  &__toolbar {
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
-
-    cursor: pointer;
-
-    &:hover,
-    &:focus-visible {
-      opacity: 1;
-    }
-
-    &:disabled {
-      opacity: 0.3;
-      cursor: default;
-    }
+    font-size: 0.8rem;
+    color: var(--border);
   }
 
-  .is-active {
-    //background: var(--bg-light);
+  &__copy {
+    all: unset;
+    &-label {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
   }
 }
