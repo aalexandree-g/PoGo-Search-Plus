@@ -4,57 +4,14 @@
   gap: 1rem;
 
   &__content {
-    --elevation-color: var(--text);
-    color: var(--text);
     background: var(--bg-light);
+    border-color: var(--bg-light);
+    resize: none;
   }
 
   &__actions {
     display: flex;
     justify-content: flex-end;
     gap: 1rem;
-  }
-
-  &__button {
-    height: 3rem;
-    padding: 1rem 2rem;
-    border-radius: 0.7rem;
-    font-size: 0.8rem;
-    font-family: monospace;
-    outline: none;
-    cursor: pointer;
-
-    color: var(--button-color);
-    border: solid 1px var(--button-color);
-    box-shadow: 0 2px var(--button-color);
-    transition: 0.2s ease-in-out;
-
-    &:hover,
-    &:focus-visible {
-      color: var(--hover-color);
-      border-color: var(--hover-color);
-      box-shadow: 0 4px var(--hover-color);
-    }
-
-    &--submit {
-      background: var(--bg-light);
-      --button-color: var(--text);
-      --hover-color: var(--primary);
-    }
-
-    &--reset {
-      background: var(--bg);
-      --button-color: var(--text-muted);
-      --hover-color: var(--text);
-
-      &:hover,
-      &:focus-visible {
-        background: var(--bg-light);
-      }
-    }
-  }
-
-  .is-active {
-    background: var(--bg);
   }
 }

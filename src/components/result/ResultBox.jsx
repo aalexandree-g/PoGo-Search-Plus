@@ -13,7 +13,7 @@ const ResultBox = ({ show, hasSubmitted, result }) => {
   return (
     <div className="result-box">
       <div
-        className={`result-box__content u-surface u-elevated ${
+        className={`u-surface result-box__content  ${
           hasSubmitted ? 'is-active' : ''
         }`}
       >

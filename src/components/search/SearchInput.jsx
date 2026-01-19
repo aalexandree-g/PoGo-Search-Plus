@@ -1,9 +1,10 @@
 const SearchInput = ({
   refEl,
-  hasSubmitted,
   value,
   onChange,
   onInput,
+  onFocus,
+  onBlur,
   showReset,
   onReset,
 }) => {
@@ -11,13 +12,13 @@ const SearchInput = ({
     <div className="search-input">
       <textarea
         ref={refEl}
-        className={`search-input__content u-surface u-elevated ${
-          hasSubmitted ? 'is-active' : ''
-        }`}
-        rows={1}
+        className="u-surface search-input__content"
+        rows={2}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         onInput={onInput}
+        onFocus={onFocus}
+        onBlur={onBlur}
         spellCheck="false"
         placeholder={`Tapez votre recherche. Exemple : (pikachu&chromatique),4*`}
       />
@@ -26,17 +27,14 @@ const SearchInput = ({
         {showReset && (
           <button
             type="button"
-            className="search-input__button search-input__button--reset"
+            className="u-surface btn btn--reset"
             onClick={onReset}
           >
             Reset
           </button>
         )}
 
-        <button
-          className="search-input__button search-input__button--submit"
-          type="submit"
-        >
+        <button className="u-surface btn btn--submit" type="submit">
           Convertir
         </button>
       </div>

@@ -28,6 +28,7 @@ const Home = () => {
           value={homeLogic.value}
           onChange={homeLogic.setValue}
           onInput={onInput}
+          onFocus={homeLogic.setIsFocused}
           showReset={homeLogic.showReset}
           onReset={homeLogic.handleReset}
         />

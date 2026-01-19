@@ -1,14 +1,7 @@
 .rules {
-  font-family: inherit;
   display: flex;
   flex-direction: column;
-  color: var(--secondary);
-  background: var(--bg);
-  --elevation-color: var(--secondary);
-
-  &:focus-visible {
-    outline: none;
-  }
+  color: var(--text);
 
   &__header {
     display: flex;
@@ -18,11 +11,12 @@
   }
 
   &__title {
+    font-size: 1.138rem;
     margin: 0;
-    font-size: 1rem;
   }
 
   &__icon {
+    color: var(--text-muted);
     transition: transform 0.2s ease;
 
     &--open {

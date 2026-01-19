@@ -4,7 +4,7 @@ const RulesAccordion = ({ isOpen, onToggle, rules }) => {
   return (
     <button
       type="button"
-      className={`rules u-surface u-elevated ${isOpen ? 'rules--open' : ''}`}
+      className={`u-surface rules ${isOpen ? 'rules--open' : ''}`}
       onClick={onToggle}
       aria-expanded={isOpen}
       aria-controls="rules-content"

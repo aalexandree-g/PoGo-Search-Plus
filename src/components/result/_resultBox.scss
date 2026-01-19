@@ -1,8 +1,10 @@
 .result-box {
   position: relative;
   width: 100%;
+
   &__content {
-    --elevation-color: var(--primary);
+    background: var(--bg-light);
+    border-color: var(--bg-light);
   }
 
   &__text {
@@ -33,8 +35,6 @@
     &:hover,
     &:focus-visible {
       opacity: 1;
-
-      outline: none;
     }
 
     &:disabled {
@@ -44,6 +44,6 @@
   }
 
   .is-active {
-    background: var(--bg-light);
+    //background: var(--bg-light);
   }
 }

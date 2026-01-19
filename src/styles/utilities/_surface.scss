@@ -1,6 +1,15 @@
 .u-surface {
+  font-size: 1rem;
   padding: 0.8rem 1rem;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--bg);
+  border-top: 1px solid var(--highlight);
   border-radius: 0.7rem;
-  resize: none;
-  outline: none;
+  box-shadow: 0 2px 4px var(--shadow-muted);
+
+  &:hover,
+  &:focus-visible {
+    box-shadow: 0 2px 8px var(--shadow);
+  }
 }

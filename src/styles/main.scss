@@ -1,5 +1,9 @@
 @use './variables';
 
+// utilities
+@use '../styles/utilities/surface';
+@use '../styles/utilities/button';
+
 // components
 @use '../components/header/header';
 @use '../components/rules/rulesAccordion';
@@ -9,14 +13,13 @@
 // pages
 @use '../pages/home/home';
 
-// utilities
-@use '../styles/utilities/surface';
-@use '../styles/utilities/elevated';
+:root {
+  font-family: 'Inter', system-ui, sans-serif;
+}
 
 body {
-  font-family: monospace;
-  background: var(--bg);
-  color: var(--text-muted);
+  background: var(--bg-dark);
+  color: red;
   margin: 0;
 }
 

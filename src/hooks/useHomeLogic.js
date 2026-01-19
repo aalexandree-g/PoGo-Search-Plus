@@ -21,8 +21,6 @@ export function useHomeLogic({ onResize } = {}) {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log('SUBMIT value:', value)
-
     setResult(value)
     setHasSubmitted(true)
   }
