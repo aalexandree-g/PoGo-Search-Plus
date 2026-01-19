@@ -25,11 +25,12 @@
     justify-content: space-between;
     align-items: center;
     font-size: 0.8rem;
-    color: var(--border);
+    color: var(--text-muted);
   }
 
   &__copy {
     all: unset;
+    cursor: pointer;
     &-label {
       display: flex;
       align-items: center;

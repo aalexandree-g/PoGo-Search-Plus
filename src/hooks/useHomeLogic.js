@@ -1,5 +1,5 @@
-import { useRef, useState } from 'react'
-import { normalize } from '../core/search/normalize'
+import { useState } from 'react'
+import { tokenize } from '../core/search/tokenize'
 
 export function useHomeLogic({ onResize } = {}) {
   const [value, setValue] = useState('')
@@ -7,8 +7,6 @@ export function useHomeLogic({ onResize } = {}) {
   const [hasSubmitted, setHasSubmitted] = useState(false)
   const [isFocused, setIsFocused] = useState(false)
   const [isRulesOpen, setIsRulesOpen] = useState(false)
-
-  const resultRef = useRef(null)
 
   const toggleRules = () => setIsRulesOpen((prev) => !prev)
 
@@ -25,13 +23,9 @@ export function useHomeLogic({ onResize } = {}) {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    const normalized = normalize(value)
-    setResult(normalized)
+    const tokens = tokenize(value)
+    setResult(JSON.stringify(tokens, null, 2))
     setHasSubmitted(true)
-    requestAnimationFrame(() => {
-      resultRef.current?.focus()
-      resultRef.current?.scrollIntoView({ behavior: 'smooth' })
-    })
   }
 
   const showReset = hasSubmitted || value.length > 0
