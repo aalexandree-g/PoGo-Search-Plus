@@ -27,7 +27,7 @@ const Home = () => {
           hasSubmitted={homeLogic.hasSubmitted}
           isFocused={homeLogic.isFocused}
           value={homeLogic.value}
-          onChange={homeLogic.setValue}
+          onChange={homeLogic.handleChange}
           onInput={onInput}
           onFocus={homeLogic.handleFocus}
           onBlur={homeLogic.handleBlur}
@@ -38,6 +38,7 @@ const Home = () => {
           show={homeLogic.hasSubmitted}
           hasSubmitted={homeLogic.hasSubmitted}
           result={homeLogic.result}
+          error={homeLogic.error}
         />
       </form>
     </div>

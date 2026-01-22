@@ -5,6 +5,7 @@ import { parseAndWithOrPriority } from '../core/search/parse'
 export function useHomeLogic({ onResize } = {}) {
   const [value, setValue] = useState('')
   const [result, setResult] = useState('')
+  const [error, setError] = useState(null)
   const [hasSubmitted, setHasSubmitted] = useState(false)
   const [isFocused, setIsFocused] = useState(false)
   const [isRulesOpen, setIsRulesOpen] = useState(false)
@@ -14,9 +15,15 @@ export function useHomeLogic({ onResize } = {}) {
   const handleFocus = () => setIsFocused(true)
   const handleBlur = () => setIsFocused(false)
 
+  const handleChange = (nextValue) => {
+    setValue(nextValue)
+    setError(null)
+  }
+
   const handleReset = () => {
     setValue('')
     setResult('')
+    setError(null)
     setHasSubmitted(false)
     setIsFocused(false)
     requestAnimationFrame(() => onResize?.())
@@ -24,9 +31,20 @@ export function useHomeLogic({ onResize } = {}) {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    const tokens = tokenize(value)
-    const ast = parseAndWithOrPriority(tokens)
-    setResult(JSON.stringify(ast, null, 2))
+
+    let resultValue = ''
+    let errorValue = null
+
+    try {
+      const tokens = tokenize(value)
+      const ast = parseAndWithOrPriority(tokens)
+      resultValue = JSON.stringify(ast, null, 2)
+    } catch (err) {
+      errorValue = err.message
+    }
+
+    setResult(resultValue)
+    setError(errorValue)
     setHasSubmitted(true)
   }
 
@@ -34,14 +52,15 @@ export function useHomeLogic({ onResize } = {}) {
 
   return {
     value,
-    setValue,
     result,
+    error,
     hasSubmitted,
     isFocused,
     isRulesOpen,
     toggleRules,
     handleFocus,
     handleBlur,
+    handleChange,
     handleReset,
     handleSubmit,
     showReset,

@@ -38,3 +38,14 @@
     }
   }
 }
+
+.result-box__content.is-error {
+  color: var(--warning);
+  background-color: var(--warning-muted);
+  border: 1px solid var(--warning-muted);
+  border-top: 1px solid var(--warning-highlight);
+}
+
+.result-box__content.is-error .result-box__title {
+  color: #b71c1c;
+}

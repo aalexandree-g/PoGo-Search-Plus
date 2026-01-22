@@ -26,6 +26,12 @@ function splitBy(tokens, separatorType) {
   if (depth !== 0) throw new Error('Unmatched opening parenthesis')
 
   segments.push(tokens.slice(start))
+
+  // reject empty segments: "a&", "&a", "a&&b"
+  if (segments.some((seg) => seg.length === 0)) {
+    throw new Error(`Missing operand around ${separatorType}`)
+  }
+
   return segments
 }
 
@@ -81,7 +87,7 @@ function parsePrimary(segment) {
     return termNode(token)
   }
 
-  // for a parenthesized expression
+  // for an expression (often coming from parentheses)
   return parseAndWithOrPriority(unwrapped)
 }
 
