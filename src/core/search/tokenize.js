@@ -1,6 +1,4 @@
-// tokenize.js
-
-const OPERATORS = {
+const TOKEN_MAP = {
   '&': 'AND',
   ',': 'OR',
   ':': 'OR',
@@ -13,36 +11,28 @@ const OPERATORS = {
 export function tokenize(input = '') {
   const tokens = []
   let current = ''
-  let inQuotes = false
 
+  // put a 'TERM' into 'tokens'
   const flush = () => {
-    if (!current) return
-    tokens.push({ type: 'TERM', value: current })
+    const token = current.trim().toLowerCase()
     current = ''
+    if (!token) return
+    tokens.push({ type: 'TERM', value: token })
   }
 
+  // put a separator into 'tokens'
   for (const char of input) {
-    // 1) Guillemets : on les tokenise, et on bascule l'état "inQuotes"
-    if (char === '"') {
+    const type = TOKEN_MAP[char]
+    if (type) {
       flush()
-      tokens.push({ type: 'QUOTE' })
-      inQuotes = !inQuotes
-      continue
+      tokens.push({ type })
+    } else {
+      current += char
     }
-
-    // 2) Opérateurs : reconnus partout (même dans les guillemets)
-    if (OPERATORS[char]) {
-      flush()
-      tokens.push({ type: OPERATORS[char] })
-      continue
-    }
-
-    // 3) Tout le reste (y compris espaces) devient du texte
-    current += char
   }
 
   flush()
-  return tokens // inQuotes permet de détecter un guillemet non refermé
+  return tokens
 }
 
-export { OPERATORS }
+export { TOKEN_MAP }

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { tokenize } from '../core/search/tokenize'
+import { parseAndWithOrPriority } from '../core/search/parse'
 
 export function useHomeLogic({ onResize } = {}) {
   const [value, setValue] = useState('')
@@ -24,7 +25,8 @@ export function useHomeLogic({ onResize } = {}) {
   const handleSubmit = (e) => {
     e.preventDefault()
     const tokens = tokenize(value)
-    setResult(JSON.stringify(tokens, null, 2))
+    const ast = parseAndWithOrPriority(tokens)
+    setResult(JSON.stringify(ast, null, 2))
     setHasSubmitted(true)
   }
 
