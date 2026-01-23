@@ -15,7 +15,7 @@ function splitBy(tokens, separatorType) {
     if (token.type === 'LPAREN') depth++
     else if (token.type === 'RPAREN') depth--
 
-    if (depth < 0) throw new Error('Unmatched closing parenthesis')
+    if (depth < 0) throw new Error('Parenthèses non ouvertes')
 
     if (depth === 0 && token.type === separatorType) {
       segments.push(tokens.slice(start, i))
@@ -23,13 +23,13 @@ function splitBy(tokens, separatorType) {
     }
   })
 
-  if (depth !== 0) throw new Error('Unmatched opening parenthesis')
+  if (depth !== 0) throw new Error('Parenthèses non fermées')
 
   segments.push(tokens.slice(start))
 
   // reject empty segments: "a&", "&a", "a&&b"
   if (segments.some((seg) => seg.length === 0)) {
-    throw new Error(`Missing operand around ${separatorType}`)
+    throw new Error(`Expression incomplète autour d'un ${separatorType}`)
   }
 
   return segments
@@ -78,7 +78,8 @@ function unwrapOuterParens(tokens) {
 function parsePrimary(segment) {
   const unwrapped = unwrapOuterParens(segment)
 
-  if (!unwrapped.length) throw new Error('Empty expression')
+  // reject empty expressions: "()", "( )"
+  if (!unwrapped.length) throw new Error('Expression vide')
 
   // for a single TERM
   if (unwrapped.length === 1) {

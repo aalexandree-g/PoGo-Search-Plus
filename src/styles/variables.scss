@@ -18,7 +18,8 @@
 
   --warning: oklch(0.5 0.2 30);
   --warning-muted: oklch(0.94 0.02 30);
-  --warning-highlight: oklch(0.98 0.02 30);
+  --warning-light: oklch(0.5 0.02 30);
+  --warning-highlight: oklch(0.97 0.02 30);
 
   --logo-main: var(--primary);
   --logo-center: oklch(1 0 0);
@@ -37,6 +38,11 @@
   --highlight: oklch(0.25 0 20);
   --shadow: var(--bg-dark);
   --shadow-muted: var(--bg-dark);
+
+  --warning: oklch(0.95 0.2 30);
+  --warning-muted: oklch(0.25 0.02 30);
+  --warning-light: oklch(0.7 0.02 30);
+  --warning-highlight: oklch(0.3 0.02 30);
 
   --logo-main: var(--secondary);
   --logo-bottom: var(--text);

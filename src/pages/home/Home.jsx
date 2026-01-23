@@ -17,6 +17,7 @@ const Home = () => {
         <RulesAccordion
           isOpen={homeLogic.isRulesOpen}
           onToggle={homeLogic.toggleRules}
+          title={'Comment ça marche ?'}
           rules={[
             'les parenthèses sont prioritaires',
             'mettre une expression avec un espace entre guillemets. Exemple : "M. Mime"',

@@ -25,7 +25,7 @@ export function tokenize(input = '') {
     const type = TOKEN_MAP[char]
     if (type) {
       flush()
-      tokens.push({ type })
+      tokens.push({ type, raw: char })
     } else {
       current += char
     }

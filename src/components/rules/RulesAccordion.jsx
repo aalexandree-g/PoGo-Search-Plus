@@ -1,6 +1,6 @@
 import { ChevronDown } from 'lucide-react'
 
-const RulesAccordion = ({ isOpen, onToggle, rules }) => {
+const RulesAccordion = ({ isOpen, onToggle, title, rules }) => {
   return (
     <button
       type="button"
@@ -10,7 +10,7 @@ const RulesAccordion = ({ isOpen, onToggle, rules }) => {
       aria-controls="rules-content"
     >
       <div className="rules__header">
-        <h1 className="rules__title">À savoir</h1>
+        <h1 className="rules__title">{title}</h1>
         <span
           className={`rules__icon ${isOpen ? 'rules__icon--open' : ''}`}
           aria-hidden="true"

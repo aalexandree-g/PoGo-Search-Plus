@@ -24,8 +24,12 @@ const ResultBox = ({ show, hasSubmitted, result, error }) => {
           .join(' ')}
       >
         <div className="result-box__toolbar">
-          <span className="result-box__title">
-            Formule adaptée à Pokémon GO
+          <span
+            className={['result-box__title', isError && 'is-error']
+              .filter(Boolean)
+              .join(' ')}
+          >
+            {isError ? 'Erreur de syntaxe' : 'Formule adaptée à Pokémon GO'}
           </span>
 
           {!isError && result && (

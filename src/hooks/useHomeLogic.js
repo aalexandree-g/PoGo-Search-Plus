@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { tokenize } from '../core/search/tokenize'
 import { parseAndWithOrPriority } from '../core/search/parse'
+import { toCNF } from '../core/search/normalize'
+import { astToPokemon } from '../core/search/serialize'
 
 export function useHomeLogic({ onResize } = {}) {
   const [value, setValue] = useState('')
@@ -17,6 +19,7 @@ export function useHomeLogic({ onResize } = {}) {
 
   const handleChange = (nextValue) => {
     setValue(nextValue)
+    setResult('')
     setError(null)
   }
 
@@ -29,6 +32,8 @@ export function useHomeLogic({ onResize } = {}) {
     requestAnimationFrame(() => onResize?.())
   }
 
+  const MAX_LENGTH = 100000
+
   const handleSubmit = (e) => {
     e.preventDefault()
 
@@ -38,7 +43,15 @@ export function useHomeLogic({ onResize } = {}) {
     try {
       const tokens = tokenize(value)
       const ast = parseAndWithOrPriority(tokens)
-      resultValue = JSON.stringify(ast, null, 2)
+      const normalized = toCNF(ast)
+      resultValue = astToPokemon(normalized)
+      //resultValue = JSON.stringify(ast, null, 2)
+
+      if (resultValue.length > MAX_LENGTH) {
+        throw new Error(
+          `Résultat trop long (${resultValue.length} caractères). Limite : ${MAX_LENGTH}.`
+        )
+      }
     } catch (err) {
       errorValue = err.message
     }
