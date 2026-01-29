@@ -1,6 +1,4 @@
-function termNode(token) {
-  return { type: 'TERM', value: token.value }
-}
+import { termNode, combineLeft } from './astUtils'
 
 /**
  * Splits tokens into segments separated by `separatorType`,
@@ -36,17 +34,6 @@ function splitBy(tokens, separatorType) {
 }
 
 /**
- * Combines nodes into a left-associative binary tree.
- * Example: [a,b,c] with 'OR' -> OR(OR(a,b),c)
- */
-function combineLeft(nodes, opType) {
-  if (!nodes.length) throw new Error('No node to combine')
-  return nodes
-    .slice(1)
-    .reduce((acc, node) => ({ type: opType, left: acc, right: node }), nodes[0])
-}
-
-/**
  * If the whole segment is wrapped by parentheses, remove them: ( ... ) -> ...
  */
 function unwrapOuterParens(tokens) {
@@ -70,6 +57,19 @@ function unwrapOuterParens(tokens) {
   return tokens.slice(1, last)
 }
 
+function hasTopLevelOp(tokens, opTypes) {
+  let depth = 0
+
+  for (const t of tokens) {
+    if (t.type === 'LPAREN') depth++
+    else if (t.type === 'RPAREN') depth--
+
+    if (depth === 0 && opTypes.includes(t.type)) return true
+  }
+
+  return false
+}
+
 /**
  * Parse a primary expression:
  * - a single TERM
@@ -79,7 +79,19 @@ function parsePrimary(segment) {
   const unwrapped = unwrapOuterParens(segment)
 
   // reject empty expressions: "()", "( )"
-  if (!unwrapped.length) throw new Error('Expression vide')
+  if (!unwrapped.length) throw new Error('Empty expression')
+
+  // If there are top-level operators, this is not a single PRIMARY.
+  // Delegate to the expression parser so NOT is handled per-segment.
+  if (hasTopLevelOp(unwrapped, ['AND', 'OR'])) {
+    return parseAndWithOrPriority(unwrapped)
+  }
+
+  // Now NOT is safe: it applies to ONE primary (TERM or parenthesized expr)
+  if (unwrapped[0].type === 'NOT') {
+    if (unwrapped.length === 1) throw new Error("Expression vide après '!'")
+    return { type: 'NOT', child: parsePrimary(unwrapped.slice(1)) }
+  }
 
   // for a single TERM
   if (unwrapped.length === 1) {
@@ -109,7 +121,7 @@ function parseChain(tokens, opType) {
 // - each segment becomes an OR chain
 // - then combine with AND
 export function parseAndWithOrPriority(tokens) {
-  if (!tokens.length) throw new Error('Expression vide')
+  if (!tokens.length) throw new Error('Empty expression')
 
   const andSegments = splitBy(tokens, 'AND')
   const orNodes = andSegments.map((seg) => parseChain(seg, 'OR'))

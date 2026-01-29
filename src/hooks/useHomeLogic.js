@@ -1,8 +1,5 @@
 import { useState } from 'react'
-import { tokenize } from '../core/search/tokenize'
-import { parseAndWithOrPriority } from '../core/search/parse'
-import { toCNF } from '../core/search/normalize'
-import { astToPokemon } from '../core/search/serialize'
+import { transform } from '../core/search'
 
 export function useHomeLogic({ onResize } = {}) {
   const [value, setValue] = useState('')
@@ -37,26 +34,22 @@ export function useHomeLogic({ onResize } = {}) {
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    let resultValue = ''
+    let output = ''
     let errorValue = null
 
     try {
-      const tokens = tokenize(value)
-      const ast = parseAndWithOrPriority(tokens)
-      const normalized = toCNF(ast)
-      resultValue = astToPokemon(normalized)
-      //resultValue = JSON.stringify(ast, null, 2)
+      output = transform(value)
 
-      if (resultValue.length > MAX_LENGTH) {
+      if (output.length > MAX_LENGTH) {
         throw new Error(
-          `Résultat trop long (${resultValue.length} caractères). Limite : ${MAX_LENGTH}.`
+          `Résultat trop long (${output.length} caractères). Limite : ${MAX_LENGTH}.`
         )
       }
     } catch (err) {
       errorValue = err.message
     }
 
-    setResult(resultValue)
+    setResult(output)
     setError(errorValue)
     setHasSubmitted(true)
   }

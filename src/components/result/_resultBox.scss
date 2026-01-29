@@ -24,8 +24,9 @@
   }
 
   &__text {
-    white-space: pre-wrap;
-    word-break: break-all;
+    white-space: pre-wrap; /* conserve les retours à la ligne */
+    overflow-wrap: break-word; /* évite le débordement */
+    word-break: normal;
     margin: 0;
   }
 

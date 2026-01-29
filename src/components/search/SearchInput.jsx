@@ -27,7 +27,7 @@ const SearchInput = ({
         onFocus={onFocus}
         onBlur={onBlur}
         spellCheck="false"
-        placeholder={`Tapez votre recherche. Exemple : (pikachu&chromatique),4*`}
+        placeholder={`Enter your search. Example: (pikachu&shiny),4*`}
       />
 
       <div className="search-input__actions">
@@ -42,7 +42,7 @@ const SearchInput = ({
         )}
 
         <button className="u-surface btn btn--submit" type="submit">
-          Convertir
+          Convert
         </button>
       </div>
     </div>

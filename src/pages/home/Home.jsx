@@ -10,6 +10,9 @@ const Home = () => {
   const { ref, onInput } = useAutoResizeTextarea()
   const homeLogic = useHomeLogic({ onResize: onInput })
 
+  const title = 'How does it work ?'
+  const rules = ['Write 0-3attack instead of !4attack', '']
+
   return (
     <div className="app">
       <Header />
@@ -17,11 +20,8 @@ const Home = () => {
         <RulesAccordion
           isOpen={homeLogic.isRulesOpen}
           onToggle={homeLogic.toggleRules}
-          title={'Comment ça marche ?'}
-          rules={[
-            'les parenthèses sont prioritaires',
-            'mettre une expression avec un espace entre guillemets. Exemple : "M. Mime"',
-          ]}
+          title={title}
+          rules={rules}
         />
         <SearchInput
           refEl={ref}

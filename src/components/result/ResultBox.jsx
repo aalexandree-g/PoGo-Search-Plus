@@ -6,6 +6,10 @@ const ResultBox = ({ show, hasSubmitted, result, error }) => {
   const text = error || result || ''
   const isError = Boolean(error)
 
+  // Inserts a zero-width space after each operator (& , ; :)
+  // so long search strings can wrap naturally without cutting words
+  const formattedText = text.replace(/[&,;:]/g, (char) => `${char}\u200B`)
+
   const handleCopy = async () => {
     if (!result || isError) return
     await navigator.clipboard.writeText(result)
@@ -29,7 +33,7 @@ const ResultBox = ({ show, hasSubmitted, result, error }) => {
               .filter(Boolean)
               .join(' ')}
           >
-            {isError ? 'Erreur de syntaxe' : 'Formule adaptée à Pokémon GO'}
+            {isError ? 'Invalid syntax' : 'Advanced search for Pokémon GO'}
           </span>
 
           {!isError && result && (
@@ -37,23 +41,23 @@ const ResultBox = ({ show, hasSubmitted, result, error }) => {
               type="button"
               className="result-box__copy"
               onClick={handleCopy}
-              aria-label="Copier le résultat"
-              title="Copier"
+              aria-label="Copy result"
+              title="Copy"
               disabled={!text}
             >
               <div className="result-box__copy-label">
                 {' '}
-                <span>Copier le code</span> <Copy size={14} />{' '}
+                <span>Copy to clipboard</span> <Copy size={14} />{' '}
               </div>
             </button>
           )}
         </div>
 
         {text ? (
-          <pre className="result-box__text">{text}</pre>
+          <pre className="result-box__text">{formattedText}</pre>
         ) : (
           <span className="result-box__placeholder">
-            Le résultat apparaîtra ici...
+            The result will appear here...
           </span>
         )}
       </div>
