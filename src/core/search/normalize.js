@@ -122,7 +122,7 @@ function assertNoForbiddenIVTerms(node) {
     const term = String(node.child.value).trim().toLowerCase()
 
     if (FORBIDDEN_NEGATED_IV_REGEX.test(term)) {
-      throw new Error(`Forbidden filter : "!${node.child.value}".`)
+      throw new Error(`Forbidden filter: "!${node.child.value}".`)
     }
 
     return

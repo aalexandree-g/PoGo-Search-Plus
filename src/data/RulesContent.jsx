@@ -5,8 +5,9 @@ export const rulesContent = {
       title: 'IV ranges',
       content: (
         <>
-          Negation <code>!</code> is ignored for IV ranges (e.g.{' '}
-          <code>!1attack</code> = <code>1attack</code>).
+          Negation <code>!</code> is ignored in-game for IV ranges.
+          <br />
+          (e.g. <code>!1attack</code> = <code>1attack</code>)
         </>
       ),
     },
@@ -16,6 +17,9 @@ export const rulesContent = {
         <>
           Regional forms excluded by <code>!Alola</code>, <code>!Galar</code>,{' '}
           <code>!Hisui</code>, and <code>!Paldea</code> cannot be unexcluded.
+          <br />
+          (e.g. <code>(rattata&alola),(meowth&!alola)</code> won't show any
+          Rattata)
         </>
       ),
     },

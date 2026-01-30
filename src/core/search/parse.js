@@ -12,12 +12,12 @@ function walkTopLevel(tokens, onTopLevelToken) {
     if (token.type === 'LPAREN') depth++
     else if (token.type === 'RPAREN') depth--
 
-    if (depth < 0) throw new Error('Parenthèses non ouvertes')
+    if (depth < 0) throw new Error(`Unmatched closing parenthesis: missing '('`)
 
     if (depth === 0) onTopLevelToken(token, i)
   })
 
-  if (depth !== 0) throw new Error('Parenthèses non fermées')
+  if (depth !== 0) throw new Error(`Unmatched opening parenthesis: missing ')'`)
 }
 
 /**
@@ -52,7 +52,10 @@ function splitBy(tokens, separatorType) {
 
   // reject empty segments: "a&", "&a", "a&&b"
   if (segments.some((seg) => seg.length === 0)) {
-    throw new Error(`Expression incomplète autour d'un ${separatorType}`)
+    const opToken = tokens.find((t) => t.type === separatorType)
+    const label = opToken?.raw ?? separatorType
+
+    throw new Error(`Incomplete expression around '${label}'`)
   }
 
   return segments
@@ -83,13 +86,22 @@ function unwrapOuterParens(tokens) {
   return tokens.slice(1, last)
 }
 
+function unwrapAllOuterParens(tokens) {
+  let current = tokens
+  while (true) {
+    const next = unwrapOuterParens(current)
+    if (next === current) return current
+    current = next
+  }
+}
+
 /**
  * Parse a primary expression:
  * - a single TERM
  * - or a parenthesized expression ( ... )
  */
 function parsePrimary(segment) {
-  const unwrapped = unwrapOuterParens(segment)
+  const unwrapped = unwrapAllOuterParens(segment)
 
   // reject empty expressions: "()", "( )"
   if (!unwrapped.length) throw new Error('Empty expression')
@@ -102,7 +114,7 @@ function parsePrimary(segment) {
 
   // Now NOT is safe: it applies to ONE primary (TERM or parenthesized expr)
   if (unwrapped[0].type === 'NOT') {
-    if (unwrapped.length === 1) throw new Error("Expression vide après '!'")
+    if (unwrapped.length === 1) throw new Error("Empty expression after '!'")
     return { type: 'NOT', child: parsePrimary(unwrapped.slice(1)) }
   }
 
@@ -113,15 +125,19 @@ function parsePrimary(segment) {
     return termNode(token)
   }
 
-  // for an expression (often coming from parentheses)
-  return parseAndWithOrPriority(unwrapped)
+  // This is usually a missing operator around parentheses or between terms.
+  throw new Error(
+    `Missing operator (& or ,) near: ${unwrapped
+      .map((t) => t.raw ?? t.value ?? t.type)
+      .join(' ')}`
+  )
 }
 
 /**
  * Parses a chain of PRIMARY separated by `opType` at top level.
  */
 function parseChain(tokens, opType) {
-  if (!tokens.length) throw new Error(`Morceau ${opType} vide`)
+  if (!tokens.length) throw new Error(`Empty ${opType} segment`)
 
   const segments = splitBy(tokens, opType)
   const nodes = segments.map((seg) => parsePrimary(seg))

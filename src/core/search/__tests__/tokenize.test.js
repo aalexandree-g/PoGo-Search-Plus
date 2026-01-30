@@ -7,14 +7,14 @@ describe('tokenize', () => {
   })
 
   test('tokenizes operators with raw', () => {
-    expect(tokenize('(pikachu&chromatique),4*')).toEqual([
+    expect(tokenize('(a&b),c')).toEqual([
       { type: 'LPAREN', raw: '(' },
-      { type: 'TERM', value: 'pikachu' },
+      { type: 'TERM', value: 'a' },
       { type: 'AND', raw: '&' },
-      { type: 'TERM', value: 'chromatique' },
+      { type: 'TERM', value: 'b' },
       { type: 'RPAREN', raw: ')' },
       { type: 'OR', raw: ',' },
-      { type: 'TERM', value: '4*' },
+      { type: 'TERM', value: 'c' },
     ])
   })
 
@@ -25,7 +25,7 @@ describe('tokenize', () => {
   })
 
   test('keeps unicode and lowercases', () => {
-    expect(tokenize('Évoli')).toEqual([{ type: 'TERM', value: 'évoli' }])
+    expect(tokenize('ÉvoLI')).toEqual([{ type: 'TERM', value: 'évoli' }])
   })
 
   test('does not create empty TERM tokens', () => {

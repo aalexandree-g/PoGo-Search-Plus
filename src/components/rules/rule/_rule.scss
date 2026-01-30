@@ -2,11 +2,12 @@
   padding: 0rem 1rem;
 
   &__title {
+    position: relative;
     display: inline-block;
-    font-size: 1rem;
+    font-size: 1.067rem;
     margin: 0;
-    padding: 0 1.5rem 0rem 0.5rem;
-    border-bottom: 0.3rem solid var(--primary-dark);
+    padding: 0 3rem 0.3rem 1rem;
+    border-bottom: 0.2rem solid var(--primary-dark);
   }
 
   p {
@@ -29,6 +30,11 @@
 }
 
 .dark {
+  .rule {
+    &__title {
+      border-color: var(--primary-dark);
+    }
+  }
   code {
     border: 1px solid var(--highlight);
   }
