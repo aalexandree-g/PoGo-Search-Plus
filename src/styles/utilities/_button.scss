@@ -47,10 +47,10 @@
     }
 
     &--submit {
-      color: var(--secondary);
+      color: var(--primary);
       &:hover,
       &:focus-visible {
-        color: var(--secondary);
+        color: var(--primary);
       }
     }
   }

@@ -1,4 +1,4 @@
-import { flattenByType, dedupeTermNodes, buildChain } from './astUtils'
+import { flattenByType, dedupeTermNodes, combineLeft } from './astUtils'
 
 /**
  * Converts an expression tree to CNF (Conjunctive Normal Form),
@@ -102,7 +102,7 @@ export function dedupeAst(node) {
     const flat = flattenByType({ type: node.type, left, right }, node.type)
     const deduped = dedupeTermNodes(flat)
 
-    return buildChain(deduped, node.type)
+    return combineLeft(deduped, node.type)
   }
 
   return { ...node, left, right }
@@ -112,7 +112,7 @@ export function dedupeAst(node) {
 // Examples rejected: !4pv, !0attack, !2-4defense
 // Examples allowed: !pv100
 const FORBIDDEN_NEGATED_IV_REGEX =
-  /^([0-4]|[0-4]-[0-4])(pv|attack|defense|attaque|défense)$/
+  /^([0-4]|[0-4]-[0-4])(attack|defense|hp|attaque|défense|pv)$/
 
 function assertNoForbiddenIVTerms(node) {
   if (!node) return
@@ -122,7 +122,7 @@ function assertNoForbiddenIVTerms(node) {
     const term = String(node.child.value).trim().toLowerCase()
 
     if (FORBIDDEN_NEGATED_IV_REGEX.test(term)) {
-      throw new Error(`Forbidden filter : "!${node.child.value}". `)
+      throw new Error(`Forbidden filter : "!${node.child.value}".`)
     }
 
     return

@@ -11,6 +11,7 @@ export function termNode(token) {
  */
 export function combineLeft(nodes, opType) {
   if (!nodes.length) throw new Error('No node to combine')
+  if (nodes.length === 1) return nodes[0]
 
   return nodes
     .slice(1)
@@ -32,15 +33,6 @@ export function flattenByType(node, type, acc = []) {
   }
 
   return acc
-}
-
-/**
- * Builds a left-associative tree from a list of nodes.
- * Returns null for an empty list, or the node itself for a single element.
- */
-export function buildChain(nodes, opType) {
-  if (!nodes.length) return null
-  return nodes.length === 1 ? nodes[0] : combineLeft(nodes, opType)
 }
 
 /**

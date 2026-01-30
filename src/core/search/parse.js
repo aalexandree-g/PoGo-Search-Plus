@@ -1,12 +1,11 @@
 import { termNode, combineLeft } from './astUtils'
 
 /**
- * Splits tokens into segments separated by `separatorType`,
- * at top level (depth === 0), ignoring separators inside parentheses.
+ * Walk tokens while tracking parenthesis depth.
+ * Calls `onTopLevelToken` only at top level (depth === 0).
+ * Also validates parentheses.
  */
-function splitBy(tokens, separatorType) {
-  const segments = []
-  let start = 0
+function walkTopLevel(tokens, onTopLevelToken) {
   let depth = 0
 
   tokens.forEach((token, i) => {
@@ -15,13 +14,39 @@ function splitBy(tokens, separatorType) {
 
     if (depth < 0) throw new Error('Parenthèses non ouvertes')
 
-    if (depth === 0 && token.type === separatorType) {
+    if (depth === 0) onTopLevelToken(token, i)
+  })
+
+  if (depth !== 0) throw new Error('Parenthèses non fermées')
+}
+
+/**
+ * True if any op in `opTypes` exists at top level (outside parentheses).
+ */
+function hasTopLevelOp(tokens, opTypes) {
+  let found = false
+
+  walkTopLevel(tokens, (t) => {
+    if (opTypes.includes(t.type)) found = true
+  })
+
+  return found
+}
+
+/**
+ * Splits tokens into segments separated by `separatorType`,
+ * at top level (depth === 0), ignoring separators inside parentheses.
+ */
+function splitBy(tokens, separatorType) {
+  const segments = []
+  let start = 0
+
+  walkTopLevel(tokens, (t, i) => {
+    if (t.type === separatorType) {
       segments.push(tokens.slice(start, i))
       start = i + 1
     }
   })
-
-  if (depth !== 0) throw new Error('Parenthèses non fermées')
 
   segments.push(tokens.slice(start))
 
@@ -34,7 +59,8 @@ function splitBy(tokens, separatorType) {
 }
 
 /**
- * If the whole segment is wrapped by parentheses, remove them: ( ... ) -> ...
+ * If the whole segment is wrapped by parentheses,
+ * remove them: ( ... ) -> ...
  */
 function unwrapOuterParens(tokens) {
   const last = tokens.length - 1
@@ -55,19 +81,6 @@ function unwrapOuterParens(tokens) {
   }
 
   return tokens.slice(1, last)
-}
-
-function hasTopLevelOp(tokens, opTypes) {
-  let depth = 0
-
-  for (const t of tokens) {
-    if (t.type === 'LPAREN') depth++
-    else if (t.type === 'RPAREN') depth--
-
-    if (depth === 0 && opTypes.includes(t.type)) return true
-  }
-
-  return false
 }
 
 /**

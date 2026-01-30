@@ -1,4 +1,5 @@
 import { ChevronDown } from 'lucide-react'
+import Rule from './rule/Rule'
 
 const RulesAccordion = ({ isOpen, onToggle, title, rules }) => {
   return (
@@ -18,12 +19,11 @@ const RulesAccordion = ({ isOpen, onToggle, title, rules }) => {
           <ChevronDown />
         </span>
       </div>
+
       {isOpen && (
         <div id="rules-content" className="rules__content">
           {rules.map((rule, i) => (
-            <span key={i} className="rules__item">
-              • {rule}
-            </span>
+            <Rule key={i} title={rule.title} content={rule.content} />
           ))}
         </div>
       )}

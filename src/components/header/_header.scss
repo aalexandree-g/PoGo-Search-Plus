@@ -50,8 +50,9 @@
 .dark {
   .main-nav {
     &__theme-toggle {
+      color: var(--text-muted);
       &:hover {
-        color: var(--primary-muted);
+        color: var(--secondary);
       }
     }
   }

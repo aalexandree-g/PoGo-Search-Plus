@@ -14,6 +14,7 @@
   --primary: oklch(0.93 0.12 100);
   --primary-muted: oklch(0.96 0.12 100);
   --primary-light: oklch(0.99 0.12 100);
+  --primary-dark: oklch(0.89 0.12 100);
   --secondary: oklch(0.7 0.12 205);
 
   --warning: oklch(0.5 0.2 30);
@@ -39,12 +40,18 @@
   --shadow: var(--bg-dark);
   --shadow-muted: var(--bg-dark);
 
+  --primary: oklch(0.7 0.12 205);
+  --primary-muted: oklch(0.96 0.12 205);
+  --primary-light: oklch(0.99 0.12 205);
+  --primary-dark: oklch(0.66 0.12 205);
+  --secondary: oklch(0.93 0.12 100);
+
   --warning: oklch(0.95 0.2 30);
   --warning-muted: oklch(0.25 0.02 30);
   --warning-light: oklch(0.7 0.02 30);
   --warning-highlight: oklch(0.3 0.02 30);
 
-  --logo-main: var(--secondary);
+  --logo-main: var(--primary);
   --logo-bottom: var(--text);
   --logo-stroke: var(--bg-light);
 }

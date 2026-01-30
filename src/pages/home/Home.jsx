@@ -1,4 +1,5 @@
 import Header from '../../components/header/Header'
+import { rulesContent } from '../../data/RulesContent'
 import RulesAccordion from '../../components/rules/RulesAccordion'
 import SearchInput from '../../components/search/SearchInput'
 import ResultBox from '../../components/result/ResultBox'
@@ -10,9 +11,6 @@ const Home = () => {
   const { ref, onInput } = useAutoResizeTextarea()
   const homeLogic = useHomeLogic({ onResize: onInput })
 
-  const title = 'How does it work ?'
-  const rules = ['Write 0-3attack instead of !4attack', '']
-
   return (
     <div className="app">
       <Header />
@@ -20,8 +18,8 @@ const Home = () => {
         <RulesAccordion
           isOpen={homeLogic.isRulesOpen}
           onToggle={homeLogic.toggleRules}
-          title={title}
-          rules={rules}
+          title={rulesContent.title}
+          rules={rulesContent.items}
         />
         <SearchInput
           refEl={ref}

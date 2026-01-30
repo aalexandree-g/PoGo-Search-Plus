@@ -29,7 +29,7 @@ describe('parseAndWithOrPriority', () => {
   })
 
   test('throws on empty expression', () => {
-    expect(() => parseAndWithOrPriority([])).toThrow('Expression vide')
+    expect(() => parseAndWithOrPriority([])).toThrow('Empty expression')
   })
 
   test('throws on unmatched parentheses', () => {
